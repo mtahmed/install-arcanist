@@ -1,10 +1,9 @@
 Arcanist Installer
 ==================
 
-Before running, make sure that...
+Make sure that ...
+- On OSX, homebrew is installed
 
-* Homebrew is installed
-
-On OSX:
-
-    curl -L https://raw.github.com/mikeclarke/install-arcanist/master/install.sh | sh
+```sh
+curl -L https://raw.github.com/mtahmed/install-arcanist/master/install.sh | sh
+```
