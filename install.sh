@@ -1,30 +1,33 @@
 #!/bin/bash
 set -e
 
-# Downloads arcanist, libphutil, etc and configures your system
+# Downloads arcanist, libphutil, etc. into $HOME/.arcanist/ ...
+INSTALL_DIR="$HOME/.arcanist/"
+BIN_DIR="$HOME/bin"
 
-INSTALL_DIR="/usr/local"
-BIN_DIR="$INSTALL_DIR/bin"
-PHP_DIR="$INSTALL_DIR/php"
-
-if [ ! -e "$PHP_DIR" ]; then
-    mkdir -p $PHP_DIR
+if [ ! -e "$INSTALL_DIR" ]; then
+    mkdir -p $INSTALL_DIR
+fi;
+if [ ! -e "$BIN_DIR" ]; then
+    mkdir -p $BIN_DIR
 fi;
 
-# Install or update libphutil
-echo "Updating arcanist repos.."
-if [ -e "$PHP_DIR/libphutil" ]; then
+# Install or update libphutil ...
+echo "Updating arcanist repos ..."
+if [ -e "$INSTALL_DIR/libphutil" ]; then
     arc upgrade
 else
-    git clone git://github.com/facebook/libphutil.git "$PHP_DIR/libphutil"
-    git clone git://github.com/facebook/arcanist.git "$PHP_DIR/arcanist"
-    git clone git://github.com/facebook/phabricator.git "$PHP_DIR/phabricator"
+    git clone git://github.com/facebook/libphutil.git "$INSTALL_DIR/libphutil"
+    git clone git://github.com/facebook/arcanist.git "$INSTALL_DIR/arcanist"
 fi
 
-# Register arc commands
-echo "Registering arc command.."
+# Register arc commands ...
+echo "Registering arc command ..."
 
 # arc
-ln -s "$PHP_DIR/arcanist/bin/arc" "$BIN_DIR/arc"
+ln -s "$INSTALL_DIR/arcanist/bin/arc" "$BIN_DIR/arc"
 
+echo
+echo "Please add $HOME/bin to your PATH or run arc like so: ~/bin/arc"
+echo
 echo "Done!"
